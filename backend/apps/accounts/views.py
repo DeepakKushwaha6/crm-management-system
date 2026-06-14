@@ -110,9 +110,20 @@ class OrganizationViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsReadOnlyOrAbove]
 
     def get_queryset(self):
+
+    # drf-spectacular schema generation
+        if getattr(self, "swagger_fake_view", False):
+        return Organization.objects.none()
+
+    # unauthenticated requests
+        if not self.request.user.is_authenticated:
+        return Organization.objects.none()
+
         org_ids = OrganizationMembership.objects.filter(
-            user=self.request.user, is_active=True
-        ).values_list('organization_id', flat=True)
+        user=self.request.user,
+        is_active=True
+        ).values_list("organization_id", flat=True)
+
         return Organization.objects.filter(id__in=org_ids)
 
     @action(detail=True, methods=['get', 'post'], url_path='members')
