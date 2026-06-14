@@ -4,6 +4,7 @@ djangorestframework-simplejwt>=5.3,<6.0
 django-cors-headers>=4.3,<5.0
 django-filter>=24.0,<25.0
 drf-spectacular>=0.27,<1.0
+drf-spectacular-sidecar>=2024.0
 psycopg2-binary>=2.9,<3.0
 redis>=5.0,<6.0
 celery>=5.3,<6.0
