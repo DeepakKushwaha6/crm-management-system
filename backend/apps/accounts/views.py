@@ -113,11 +113,11 @@ class OrganizationViewSet(viewsets.ModelViewSet):
 
     # drf-spectacular schema generation
         if getattr(self, "swagger_fake_view", False):
-        return Organization.objects.none()
+            return Organization.objects.none()
 
     # unauthenticated requests
         if not self.request.user.is_authenticated:
-        return Organization.objects.none()
+            return Organization.objects.none()
 
         org_ids = OrganizationMembership.objects.filter(
         user=self.request.user,
